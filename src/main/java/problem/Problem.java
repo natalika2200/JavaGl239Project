@@ -156,5 +156,7 @@ public class Problem {
         Figures.renderTriangle(gl, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, false);
 
         Figures.renderQuad(gl,0.5, 0.5, -0.5, 0.5, 0.5, -0.5, 0.1, 0.2, false );
+
+
     }
 }
