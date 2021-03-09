@@ -26,14 +26,14 @@ public class Figures {
         gl.glEnd();
     }
 
-    public static void renderTriangle(GL2 gl, double x1, double y1, double x2, double y2, double x3, double y3, boolean filed){
-        if(filed) {
+    public static void renderTriangle(GL2 gl, double x1, double y1, double x2, double y2, double x3, double y3, boolean filed) {
+        if (filed) {
             gl.glBegin(GL.GL_TRIANGLES);
             gl.glVertex2d(x1, y1);
             gl.glVertex2d(x2, y2);
             gl.glVertex2d(x3, y3);
             gl.glEnd();
-        }else{
+        } else {
             gl.glBegin(GL.GL_LINE_STRIP);
             gl.glVertex2d(x1, y1);
             gl.glVertex2d(x2, y2);
@@ -42,15 +42,16 @@ public class Figures {
             gl.glEnd();
         }
     }
-    public static void renderQuad(GL2 gl, double x1, double y1, double x2, double y2, double x3, double y3,double x4, double y4, boolean filed){
-        if(filed) {
+
+    public static void renderQuad(GL2 gl, double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, boolean filed) {
+        if (filed) {
             gl.glBegin(GL2GL3.GL_QUADS);
             gl.glVertex2d(x1, y1);
             gl.glVertex2d(x2, y2);
             gl.glVertex2d(x3, y3);
             gl.glVertex2d(x4, y4);
             gl.glEnd();
-        }else{
+        } else {
             gl.glBegin(GL.GL_LINE_STRIP);
             gl.glVertex2d(x1, y1);
             gl.glVertex2d(x2, y2);
@@ -61,6 +62,30 @@ public class Figures {
         }
     }
 
+    public static void renderCircle(GL2 gl, double centerx, double centery, double rad, boolean filed) {
+        if (filed) {
+            gl.glBegin(GL2GL3.GL_TRIANGLE_FAN);
+            gl.glVertex2d(centerx, centery);
+            for (int i = 0; i <= 40; i++) {
+                double angle = 2 * Math.PI / 40 * i;
+                double x = rad * Math.cos(angle);
+                double y = rad * Math.sin(angle);
+                gl.glVertex2d(x + centerx, y + centery);
+            }                gl.glEnd();
+
+        } else {
+            gl.glBegin(GL.GL_LINE_STRIP);
+            gl.glVertex2d(centerx, centery);
+            for (int i = 0; i <= 40; i++) {
+                double angle = 2 * Math.PI / 40 * i;
+                double x = rad * Math.cos(angle);
+                double y = rad * Math.sin(angle);
+                gl.glVertex2d(x + centerx, y + centery);
+
+            } gl.glEnd();
+
+        }
 
 
+    }
 }

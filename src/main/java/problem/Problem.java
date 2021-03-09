@@ -134,29 +134,35 @@ public class Problem {
 //        for (Point point : points) {
 //            point.render(gl);
 //        }
-
+//
+//        gl.glColor3d(0, 1, 1);
+//        gl.glPointSize(5);
+//        Figures.renderPoint(gl, 0.5, 0.5, 3);
+//        gl.glColor3d(1, 0, 1);
+//        gl.glPointSize(10);
+//        Figures.renderPoint(gl, -0.5, 0.5, 5);
+//        gl.glColor3d(0, 1, 0);
+//        gl.glPointSize(10);
+//        Figures.renderPoint(gl, 0.5, -0.5, 4);
+//
+//        gl.glColor3d(1, 1, 1);
+//
+//        Figures.renderLine(gl, 0.5, 0.5, 3, 1, 3);
+//
+//        gl.glColor3d(0, 0, 1);
+//        Figures.renderTriangle(gl, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, true);
+//
+//        gl.glColor3d(0, 1, 1);
+//        Figures.renderTriangle(gl, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, false);
+//
+//        gl.glColor3d(0, 1, 1);
+//        Figures.renderQuad(gl,0.5, 0.5, -0.5, 0.5, 0.5, -0.5, 0.1, 0.2, true );
         gl.glColor3d(0, 1, 1);
-        gl.glPointSize(5);
-        Figures.renderPoint(gl, 0.5, 0.5, 3);
+        Circle circle = new Circle(0.1, 0.2, 0.1);
+        circle.render(gl);
+
         gl.glColor3d(1, 0, 1);
-        gl.glPointSize(10);
-        Figures.renderPoint(gl, -0.5, 0.5, 5);
-        gl.glColor3d(0, 1, 0);
-        gl.glPointSize(10);
-        Figures.renderPoint(gl, 0.5, -0.5, 4);
-
-        gl.glColor3d(1, 1, 1);
-
-        Figures.renderLine(gl, 0.5, 0.5, 3, 1, 3);
-
-        gl.glColor3d(0, 0, 1);
-        Figures.renderTriangle(gl, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, true);
-
-        gl.glColor3d(0, 1, 1);
-        Figures.renderTriangle(gl, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, false);
-
-        Figures.renderQuad(gl,0.5, 0.5, -0.5, 0.5, 0.5, -0.5, 0.1, 0.2, false );
-
-
+        Angle line = new Angle (0.5, 0.5, 3, 1, 3, 1, 3, 3);
+        line.render(gl);
     }
 }

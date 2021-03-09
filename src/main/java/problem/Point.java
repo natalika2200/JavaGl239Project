@@ -84,6 +84,8 @@ public class Point {
         gl.glPointSize(1);
     }
 
+
+
     /**
      * Получить строковое представление точки
      *
