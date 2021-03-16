@@ -30,12 +30,14 @@ public class Problem {
      * список точек
      */
     private ArrayList<Point> points;
+    private ArrayList<Circle> circles;
 
     /**
      * Конструктор класса задачи
      */
     public Problem() {
         points = new ArrayList<>();
+        circles = new ArrayList<>();
     }
 
     /**
@@ -113,8 +115,8 @@ public class Problem {
      */
     public void addRandomPoints(int n) {
         for (int i = 0; i < n; i++) {
-            Point p = Point.getRandomPoint();
-            points.add(p);
+            Circle c = Circle.getRandomCircle();
+            circles.add(c);
         }
     }
 
@@ -123,6 +125,7 @@ public class Problem {
      */
     public void clear() {
         points.clear();
+        circles.clear();
     }
 
     /**
@@ -131,6 +134,8 @@ public class Problem {
      * @param gl переменная OpenGL для рисования
      */
     public void render(GL2 gl) {
+        for (Circle c : circles)
+            c.render(gl);
 //        for (Point point : points) {
 //            point.render(gl);
 //        }
@@ -157,12 +162,20 @@ public class Problem {
 //
 //        gl.glColor3d(0, 1, 1);
 //        Figures.renderQuad(gl,0.5, 0.5, -0.5, 0.5, 0.5, -0.5, 0.1, 0.2, true );
-        gl.glColor3d(0, 1, 1);
-        Circle circle = new Circle(0.1, 0.2, 0.1);
-        circle.render(gl);
-
-        gl.glColor3d(1, 0, 1);
-        Angle line = new Angle (0.5, 0.5, 3, 1, 3, 1, 3, 3);
-        line.render(gl);
+//        gl.glColor3d(0, 1, 1);
+//        Circle circle = new Circle(0.1, 0.2, 0.1);
+//        circle.render(gl);
+//
+//        gl.glColor3d(0.6, 0.3, 0.1);
+//        circle = new Circle(0.5, 0.2, 0.1);
+//        circle.render(gl);
+//
+//        gl.glColor3d(1, 0, 1);
+//        Angle line = new Angle(new Vector(0.5, 0.5), new Vector(3, 1), new Vector(3, 1));
+//        line.render(gl);
+//
+//        gl.glColor3d(0.5, 1, 0.3);
+//        line = new Angle(new Vector(0.6, 0.2), new Vector(0.2, 0.1), new Vector(2.5, 0.01));
+//        line.render(gl);
     }
 }

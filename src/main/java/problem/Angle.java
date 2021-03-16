@@ -3,6 +3,7 @@ package problem;
 import javax.media.opengl.GL;
 import javax.media.opengl.GL2;
 import javax.media.opengl.GL2GL3;
+import java.util.Random;
 
 public class Angle {
     Vector A;
@@ -14,11 +15,22 @@ public class Angle {
     public Angle(Vector a, Vector b, Vector c) {
         A = a;
         Vector k1 = b.minus(a);
-        o1 = k1.norm().mult(3);
+        Vector k2 = c.minus(a);
+        o1 = k1.norm().mult(100);
+        o2 = k2.norm().mult(399);
 
         B = A.plus(o1);
         C = A.plus(o2);
     }
+
+//    public static Angle getRandomAngle() {
+//        Random random = new Random();
+//        return new Angle(
+//                random.nextDouble() * 2 - 1,
+//                random.nextDouble() * 2 - 1,
+//                random.nextDouble() * 0.3
+//        );
+//    }
 
     public void render(GL2 gl) {
 
