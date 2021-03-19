@@ -1,6 +1,5 @@
 package Gui;
 
-import problem.Point;
 import problem.Problem;
 
 import javax.swing.*;
@@ -16,18 +15,26 @@ public class Form extends JFrame {
      */
     private JPanel GLPlaceholder;
     private JPanel root;
-    private JTextField xPointField;
-    private JTextField yPointField;
-    private JButton randomBtn;
-    private JTextField pointCntField;
+    private JTextField xCircleField;
+    private JTextField yCircleField;
+    private JButton rndAngleBtn;
+    private JTextField rndAngleField;
     private JButton loadFromFileBtn;
     private JButton saveToFileBtn;
     private JButton clearBtn;
     private JButton solveBtn;
     private JLabel problemText;
-    private JButton addPoint;
-    private JRadioButton radioButton1;
-    private JRadioButton radioButton2;
+    private JButton addCircleBtn;
+    private JTextField radCircleField;
+    private JButton addAngleBtn;
+    private JTextField x1AngleField;
+    private JTextField y1AngleField;
+    private JTextField x2AngleField;
+    private JTextField y2AngleField;
+    private JTextField x3AngleField;
+    private JTextField y3AngleField;
+    private JTextField rndCircleField;
+    private JButton rndCircleBtn;
     /**
      * таймер
      */
@@ -81,25 +88,46 @@ public class Form extends JFrame {
     private void initWidgets() {
         // задаём текст полю описания задачи
         problemText.setText("<html>" + Problem.PROBLEM_TEXT.replaceAll("\n", "<br>"));
-        // делаем первое радио выбранным
-        radioButton1.setSelected(true);
-        radioButton2.setSelected(false);
 
-        addPoint.addActionListener(new ActionListener() {
+        addCircleBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                double x = Double.parseDouble(xPointField.getText());
-                double y = Double.parseDouble(yPointField.getText());
-                int setVal = radioButton1.isSelected() ? Point.SET_1 : Point.SET_2;
-                renderer.problem.addPoint(x, y, setVal);
+                double x = Double.parseDouble(xCircleField.getText());
+                double y = Double.parseDouble(yCircleField.getText());
+                double rad = Double.parseDouble(radCircleField.getText());
+                renderer.problem.addCircle(x, y, rad);
             }
         });
-        randomBtn.addActionListener(new ActionListener() {
+
+        addAngleBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                renderer.problem.addRandomPoints(Integer.parseInt(pointCntField.getText()));
+                double x1 = Double.parseDouble(x1AngleField.getText());
+                double y1 = Double.parseDouble(y1AngleField.getText());
+
+                double x2 = Double.parseDouble(x2AngleField.getText());
+                double y2 = Double.parseDouble(y2AngleField.getText());
+
+                double x3 = Double.parseDouble(x3AngleField.getText());
+                double y3 = Double.parseDouble(y3AngleField.getText());
+
+                renderer.problem.addAngle(x1, y1, x2, y2, x3, y3);
             }
         });
+
+        rndAngleBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                renderer.problem.addRandomAngles(Integer.parseInt(rndAngleField.getText()));
+            }
+        });
+        rndCircleBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                renderer.problem.addRandomCircle(Integer.parseInt(rndCircleField.getText()));
+            }
+        });
+
         loadFromFileBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

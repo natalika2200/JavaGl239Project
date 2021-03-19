@@ -39,12 +39,10 @@ public class Point {
      *
      * @param x         координата
      * @param y         координата y
-     * @param setNumber номер множества, к которому принадлежит точка
      */
-    Point(double x, double y, int setNumber) {
+    Point(double x, double y) {
         this.x = x;
         this.y = y;
-        this.setNumber = setNumber;
     }
 
     /**
@@ -56,8 +54,7 @@ public class Point {
         Random r = new Random();
         double nx = (double) r.nextInt(50) / 25 - 1;
         double ny = (double) r.nextInt(50) / 25 - 1;
-        int nSetVal = r.nextInt(2);
-        return new Point(nx, ny, nSetVal);
+        return new Point(nx, ny);
     }
 
     /**

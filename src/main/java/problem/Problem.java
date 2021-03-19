@@ -31,6 +31,8 @@ public class Problem {
      */
     private ArrayList<Point> points;
     private ArrayList<Circle> circles;
+    private ArrayList<Angle> angles;
+    //    private ArrayList<Angle> angles;
 
     /**
      * Конструктор класса задачи
@@ -38,18 +40,23 @@ public class Problem {
     public Problem() {
         points = new ArrayList<>();
         circles = new ArrayList<>();
+//        angles = new ArrayList<>();
+        angles = new ArrayList<>();
     }
 
     /**
      * Добавить точку
      *
-     * @param x      координата X точки
-     * @param y      координата Y точки
-     * @param setVal номер множества
+     * @param x координата X точки
+     * @param y координата Y точки
      */
-    public void addPoint(double x, double y, int setVal) {
-        Point point = new Point(x, y, setVal);
-        points.add(point);
+    public void addCircle(double x, double y, double rad) {
+        circles.add(new Circle(x, y, rad));
+    }
+
+
+    public void addAngle(double x1, double y1, double x2, double y2, double x3, double y3) {
+        angles.add(new Angle(new Vector(x1, y1), new Vector(x2, y2), new Vector(x3, y3)));
     }
 
     /**
@@ -75,18 +82,24 @@ public class Problem {
      * Загрузить задачу из файла
      */
     public void loadFromFile() {
-        points.clear();
+        circles.clear();
+        angles.clear();
         try {
             File file = new File(FILE_NAME);
             Scanner sc = new Scanner(file);
-            // пока в файле есть непрочитанные строки
-            while (sc.hasNextLine()) {
-                double x = sc.nextDouble();
-                double y = sc.nextDouble();
-                int setVal = sc.nextInt();
-                sc.nextLine();
-                Point point = new Point(x, y, setVal);
-                points.add(point);
+            int circleCnt = sc.nextInt();
+            for (int i = 0; i < circleCnt; i++) {
+                circles.add(new Circle(
+                        sc.nextDouble(), sc.nextDouble(), sc.nextDouble()
+                ));
+            }
+            int angleCnt = sc.nextInt();
+            for (int i = 0; i < angleCnt; i++) {
+                angles.add(new Angle(
+                        new Vector(sc.nextDouble(), sc.nextDouble()),
+                        new Vector(sc.nextDouble(), sc.nextDouble()),
+                        new Vector(sc.nextDouble(), sc.nextDouble())
+                ));
             }
         } catch (Exception ex) {
             System.out.println("Ошибка чтения из файла: " + ex);
@@ -99,8 +112,13 @@ public class Problem {
     public void saveToFile() {
         try {
             PrintWriter out = new PrintWriter(new FileWriter(FILE_NAME));
-            for (Point point : points) {
-                out.printf("%.2f %.2f %d\n", point.x, point.y, point.setNumber);
+            out.println(circles.size());
+            for (Circle circle : circles) {
+                out.printf("%.2f %.2f %.2f\n", circle.centerx, circle.centery, circle.rad);
+            }
+            out.println(angles.size());
+            for (Angle angle : angles) {
+                out.printf("%.2f %.2f %.2f %.2f %.2f %.2f\n", angle.A.x, angle.A.y, angle.B.x, angle.B.y, angle.C.x, angle.C.y);
             }
             out.close();
         } catch (IOException ex) {
@@ -113,12 +131,25 @@ public class Problem {
      *
      * @param n кол-во точек
      */
-    public void addRandomPoints(int n) {
+    public void addRandomCircle(int n) {
         for (int i = 0; i < n; i++) {
             Circle c = Circle.getRandomCircle();
             circles.add(c);
         }
     }
+
+    public void addRandomAngles(int n) {
+        for (int i = 0; i < n; i++) {
+            Angle a = Angle.getRandomAngle();
+            angles.add(a);
+        }
+    }
+    //    public void addRandomAngles(int n) {
+//        for (int i = 0; i < n; i++) {
+//            Angle a = Angle.getRandomAngle();
+//            circles.add(a);
+//        }
+//    }
 
     /**
      * Очистить задачу
@@ -126,6 +157,8 @@ public class Problem {
     public void clear() {
         points.clear();
         circles.clear();
+//        angles.clear();
+        angles.clear();
     }
 
     /**
@@ -136,6 +169,13 @@ public class Problem {
     public void render(GL2 gl) {
         for (Circle c : circles)
             c.render(gl);
+        for (Angle a : angles)
+            a.render(gl);
+
+        //        public void render(GL2 gl) {
+//            for (Angles a : angles)
+//                a.render(gl);
+
 //        for (Point point : points) {
 //            point.render(gl);
 //        }
@@ -174,8 +214,7 @@ public class Problem {
 //        Angle line = new Angle(new Vector(0.5, 0.5), new Vector(3, 1), new Vector(3, 1));
 //        line.render(gl);
 //
-//        gl.glColor3d(0.5, 1, 0.3);
-//        line = new Angle(new Vector(0.6, 0.2), new Vector(0.2, 0.1), new Vector(2.5, 0.01));
-//        line.render(gl);
+
+
     }
 }

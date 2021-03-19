@@ -23,9 +23,18 @@ public class Angle {
         C = A.plus(o2);
     }
 
-//    public static Angle getRandomAngle() {
+    public static Angle getRandomAngle() {
+        Random random = new Random();
+        return new Angle(
+                new Vector(random.nextDouble() * 2 - 1, random.nextDouble() * 2 - 1),
+                new Vector(random.nextDouble() * 2 - 1, random.nextDouble() * 2 - 1),
+                new Vector(random.nextDouble() * 2 - 1, random.nextDouble() * 2 - 1)
+        );
+    }
+
+//    public static Circle getRandomCircle() {
 //        Random random = new Random();
-//        return new Angle(
+//        return new Circle(
 //                random.nextDouble() * 2 - 1,
 //                random.nextDouble() * 2 - 1,
 //                random.nextDouble() * 0.3
