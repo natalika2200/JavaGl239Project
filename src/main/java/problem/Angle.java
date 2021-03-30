@@ -6,6 +6,7 @@ import javax.media.opengl.GL2GL3;
 import java.util.Random;
 
 public class Angle {
+
     Vector A;
     Vector B;
     Vector C;
@@ -24,12 +25,28 @@ public class Angle {
     }
 
     public static Angle getRandomAngle() {
+        System.out.println("getRandomAngle");
         Random random = new Random();
-        return new Angle(
-                new Vector(random.nextDouble() * 2 - 1, random.nextDouble() * 2 - 1),
-                new Vector(random.nextDouble() * 2 - 1, random.nextDouble() * 2 - 1),
-                new Vector(random.nextDouble() * 2 - 1, random.nextDouble() * 2 - 1)
-        );
+        Vector P1 = new Vector(random.nextDouble() * 2 - 1, random.nextDouble() * 2 - 1);
+        Vector P2 = new Vector(random.nextDouble() * 2 - 1, random.nextDouble() * 2 - 1);
+        Vector P3 = new Vector(random.nextDouble() * 2 - 1, random.nextDouble() * 2 - 1);
+
+        Vector a = new Vector(P2.x - P1.x, P2.y - P1.y);
+        Vector b = new Vector(P3.x - P1.x, P3.y - P1.y);
+
+        System.out.println(a.x * b.x + a.y * b.y);
+
+        System.out.println(P1 + " " + P2 + " " + P3);
+        System.out.println(a + " " + b);
+
+        if (a.x * b.x + a.y * b.y < 0) {
+            Vector P4 = new Vector(P1.x - b.x, P1.y - b.y);
+            System.out.println(P4);
+            return new Angle(P1, P2, P4);
+        }
+        {
+            return new Angle(P1, P2, P3);
+        }
     }
 
 //    public static Circle getRandomCircle() {
