@@ -74,11 +74,16 @@ public class Point {
                     gl.glColor3d(0.0, 0.0, 1.0);
                     break;
             }
-        gl.glPointSize(3);
+        gl.glPointSize(4);
         gl.glBegin(GL.GL_POINTS);
         gl.glVertex2d(x, y);
         gl.glEnd();
+        gl.glColor3d(0.0, 1.0, 0.0);
         gl.glPointSize(1);
+    }
+
+    public double dist(Point p){
+        return Math.sqrt((this.x - p.x) * (this.x - p.x) + (this.y - p.y) * (this.y - p.y));
     }
 
 

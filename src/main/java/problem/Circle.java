@@ -3,6 +3,7 @@ package problem;
 import javax.media.opengl.GL;
 import javax.media.opengl.GL2;
 import javax.media.opengl.GL2GL3;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Circle {
@@ -37,4 +38,21 @@ public class Circle {
         }
         gl.glEnd();
     }
+    public boolean IsInside(Point p){
+        if (p.dist(new Point(centerx, centery)) - rad <= 0.001){
+            return true;
+        }
+        else return false;
+    }
+    public int Square(Angle angle, ArrayList<Point> points){
+        int S = 0;
+        for (Point p : points){
+            if (angle.IsInside(p) && this.IsInside(p)){
+                S++;
+            }
+        }
+        return S;
+    }
 }
+
+

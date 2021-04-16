@@ -66,8 +66,16 @@ public class Angle {
 
         gl.glBegin(GL.GL_LINES);
         gl.glVertex2d(A.x, A.y);
-        gl.glVertex2d(C.y, C.y);
+        gl.glVertex2d(C.x, C.y);
         gl.glEnd();
+    }
+    public boolean IsInside(Point p){
+        Line l1 = new Line(A, B);
+        Line l2 = new Line(A, C);
+        if (l1.oneSide(p, new Point(C.x, C.y)) && l2.oneSide(p, new Point(B.x, B.y))){
+            return true;
+        }
+        else return false;
     }
 }
 

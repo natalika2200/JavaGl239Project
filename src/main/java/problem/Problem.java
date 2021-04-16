@@ -32,6 +32,10 @@ public class Problem {
     private ArrayList<Point> points;
     private ArrayList<Circle> circles;
     private ArrayList<Angle> angles;
+
+    Circle resCircle;
+    Angle resAngle;
+
     //    private ArrayList<Angle> angles;
 
     /**
@@ -63,15 +67,28 @@ public class Problem {
      * Решить задачу
      */
     public void solve() {
-        // перебираем пары точек
-        for (Point p : points) {
-            for (Point p2 : points) {
-                // если точки являются разными
-                if (p != p2) {
-                    // если координаты у них совпадают
-                    if (Math.abs(p.x - p2.x) < 0.0001 && Math.abs(p.y - p2.y) < 0.0001) {
-                        p.isSolution = true;
-                        p2.isSolution = true;
+        int max = 0;
+        for (int i = -100; i <= 100; i++) {
+            for (int j = -100; j <= 100; j++) {
+                points.add(new Point(0.01 * i, 0.01 * j));
+            }
+        }
+        for (Circle c : circles) {
+            for (Angle a : angles) {
+                if (c.Square(a, points) > max) {
+                    max = c.Square(a, points);
+                }
+            }
+        }
+        for (Circle c : circles) {
+            for (Angle a : angles) {
+                if (c.Square(a, points) == max) {
+                    resCircle = c;
+                    resAngle = a;
+                    for (Point p : points) {
+                        if (c.IsInside(p) && a.IsInside(p)) {
+                            p.isSolution = true;
+                        }
                     }
                 }
             }
@@ -159,6 +176,8 @@ public class Problem {
         circles.clear();
 //        angles.clear();
         angles.clear();
+        resCircle = null;
+        resAngle = null;
     }
 
     /**
@@ -167,11 +186,22 @@ public class Problem {
      * @param gl переменная OpenGL для рисования
      */
     public void render(GL2 gl) {
+        gl.glColor3d(1,0,0);
         for (Circle c : circles)
             c.render(gl);
         for (Angle a : angles)
             a.render(gl);
-
+        gl.glColor3d(1,1,0);
+        for (Point p : points) {
+            if (p.isSolution) {
+                p.render(gl);
+            }
+        }
+        gl.glColor3d(0,0,1);
+        if (resAngle != null) {
+            resAngle.render(gl);
+            resCircle.render(gl);
+        }
         //        public void render(GL2 gl) {
 //            for (Angles a : angles)
 //                a.render(gl);
